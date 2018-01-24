@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :places
   resources :characters
   put 'set_locale/:locale', constraints: { locale: /fr/ }, to: 'locales#set'
 

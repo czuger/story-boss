@@ -1,0 +1,36 @@
+= form_for @place, html: { class: 'form-horizontal', role: "form" } do |f|
+  -if @place.errors.any?
+    .alert.alert-danger.alert-dismissable{role: "alert"}
+      %button.close{type: "button", data: {dismiss: "alert"} }
+        %span{aria: {hidden: "true"} } &times;
+        %span.sr-only Close
+      %h4= "#{pluralize(@place.errors.count, "error")} prohibited this place from being saved:"
+
+      %ul
+        - @place.errors.full_messages.each do |msg|
+          %li= msg
+
+  .form-group
+    = f.label :name, class: 'col-sm-2 control-label'
+    .col-sm-10
+      
+      = f.text_field :name, class: 'form-control'
+      
+
+  .form-group
+    = f.label :desc, class: 'col-sm-2 control-label'
+    .col-sm-10
+      
+      = f.text_field :desc, class: 'form-control'
+      
+
+  .form-group
+    = f.label :ambiance, class: 'col-sm-2 control-label'
+    .col-sm-10
+      
+      = f.text_field :ambiance, class: 'form-control'
+      
+
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = f.submit class: 'btn btn-primary', value: t( '.submit' ), 'data-disable-with' => t( '.submit' )

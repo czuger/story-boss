@@ -1,6 +1,6 @@
 ---
 fr:
-  stories:
+  places:
     index:
       title: Liste
       edit: Editer
@@ -21,9 +21,10 @@ fr:
       back: Retour
     form:
       submit: Valider
-    menu_title: Scénarios
+    menu_title: Lieux
   helpers:
     label:
-      story:
+      place:
         name: Nom
         desc: Description
+        ambiance: Atmosphère

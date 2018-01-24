@@ -1,0 +1,32 @@
+.page-header
+  = link_to new_place_path( locale: I18n.locale ), class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    = t( '.new' )
+  %h1= t( '.title' )
+
+.table-responsive
+  %table.table.table-striped.table-bordered.table-hover
+    %thead
+      %tr
+        %th= t( 'helpers.label.place.name' )
+        %th= t( 'helpers.label.place.desc' )
+        %th= t( 'helpers.label.place.ambiance' )
+        %th
+        %th
+        %th
+
+    %tbody
+      - @places.each do |place|
+        %tr
+  
+          %td= place.name
+  
+  
+          %td= place.desc
+  
+  
+          %td= place.ambiance
+  
+          %td= link_to t( '.show' ), place
+          %td= link_to t( '.edit' ), edit_place_path(place)
+          %td= link_to t( '.delete' ), place, data: { confirm: t( '.confirm' ) }, method: :delete
