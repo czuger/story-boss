@@ -58,3 +58,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'toronto', path: '../toronto'
 gem 'haml-rails'
 gem 'jquery-rails'
+
+gem 'devise'

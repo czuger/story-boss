@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
 
 
+  devise_for :users
   put 'set_locale/:locale', constraints: { locale: /fr/ }, to: 'locales#set'
 
   resources :places
