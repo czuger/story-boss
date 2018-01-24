@@ -11,12 +11,10 @@ ready = () ->
       story_id = $(this)[0].value
       status = $(this).is(':checked')
 
-      $( '.current_story' ).attr('checked',false)
-      story.prop('checked', true)
+      request = $.post "/stories/#{story_id}/change_current_story?status=#{status}"
+      request.success (data) ->  Turbolinks.visit(window.location.toString(), { action: 'replace' })
+      request.error (jqXHR, textStatus, errorThrown) -> alert( 'Server error' )
 
-      $.post "/stories/#{story_id}/change_current_story?status=#{status}"
-
-      console.log( story_id )
     else
       $(this).prop('checked', true);
 

@@ -21,7 +21,7 @@
           %td= story.name
           %td= story.desc
           %td= check_box_tag "current_story_#{story.id}", story.id, story.current, class: :current_story
-  
+
           %td= link_to t( '.show' ), story
           %td= link_to t( '.edit' ), edit_story_path(story)
           %td= link_to t( '.delete' ), story, data: { confirm: t( '.confirm' ) }, method: :delete
