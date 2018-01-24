@@ -1,0 +1,30 @@
+.page-header
+  = link_to characters_path, class: 'btn btn-default' do
+    %span.glyphicon.glyphicon-list-alt
+    = t( '.back' )
+  = link_to edit_character_path(@character), class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-pencil
+    = t( '.edit' )
+  %h1= t( '.title' )
+
+%dl.dl-horizontal
+  %dt= t( 'helpers.label.character.name' ) + ' :'
+    
+  %dd= @character.name
+    
+  %dt= t( 'helpers.label.character.desc' ) + ' :'
+    
+  %dd= @character.desc
+    
+  %dt= t( 'helpers.label.character.character' ) + ' :'
+    
+  %dd= @character.character
+    
+  %dt= t( 'helpers.label.character.birth' ) + ' :'
+    
+  %dd= @character.birth
+    
+  %dt= t( 'helpers.label.character.death' ) + ' :'
+    
+  %dd= @character.death
+    

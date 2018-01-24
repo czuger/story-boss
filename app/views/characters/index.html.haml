@@ -1,0 +1,40 @@
+.page-header
+  = link_to new_character_path( locale: I18n.locale ), class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    = t( '.new' )
+  %h1= t( '.title' )
+
+.table-responsive
+  %table.table.table-striped.table-bordered.table-hover
+    %thead
+      %tr
+        %th= t( 'helpers.label.character.name' )
+        %th= t( 'helpers.label.character.desc' )
+        %th= t( 'helpers.label.character.character' )
+        %th= t( 'helpers.label.character.birth' )
+        %th= t( 'helpers.label.character.death' )
+        %th
+        %th
+        %th
+
+    %tbody
+      - @characters.each do |character|
+        %tr
+  
+          %td= character.name
+  
+  
+          %td= character.desc
+  
+  
+          %td= character.character
+  
+  
+          %td= character.birth
+  
+  
+          %td= character.death
+  
+          %td= link_to t( '.show' ), character
+          %td= link_to t( '.edit' ), edit_character_path(character)
+          %td= link_to t( '.delete' ), character, data: { confirm: t( '.confirm' ) }, method: :delete
