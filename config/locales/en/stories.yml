@@ -1,0 +1,29 @@
+---
+en:
+  stories:
+    index:
+      title: Index
+      edit: Edit
+      new: New
+      show: Show
+      delete: Delete
+      confirm: Are you sure ?
+    edit:
+      title: Edit
+      back: Back
+      show: Show
+    show:
+      title: Show
+      back: Back
+      edit: Edit
+    new:
+      title: New
+      back: Back
+    form:
+      submit: Submit
+    menu_title: story
+  helpers:
+    label:
+      story:
+        name: Name
+        desc: Desc

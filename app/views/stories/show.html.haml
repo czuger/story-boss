@@ -1,0 +1,18 @@
+.page-header
+  = link_to stories_path, class: 'btn btn-default' do
+    %span.glyphicon.glyphicon-list-alt
+    = t( '.back' )
+  = link_to edit_story_path(@story), class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-pencil
+    = t( '.edit' )
+  %h1= t( '.title' )
+
+%dl.dl-horizontal
+  %dt= t( 'helpers.label.story.name' ) + ' :'
+    
+  %dd= @story.name
+    
+  %dt= t( 'helpers.label.story.desc' ) + ' :'
+    
+  %dd= @story.desc
+    

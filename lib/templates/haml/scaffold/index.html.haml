@@ -1,0 +1,30 @@
+.page-header
+  = link_to new_<%= singular_table_name %>_path( locale: I18n.locale ), class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    = t( '.new' )
+  %h1= t( '.title' )
+
+.table-responsive
+  %table.table.table-striped.table-bordered.table-hover
+    %thead
+      %tr
+<% for attribute in attributes -%>
+        %th= <%= "t( 'helpers.label.#{singular_table_name}.#{attribute.name}' )" %>
+<% end -%>
+        %th
+        %th
+        %th
+
+    %tbody
+      - @<%= plural_table_name %>.each do |<%= singular_table_name %>|
+        %tr
+<% for attribute in attributes -%>
+  <% if attribute.type == :references %>
+          %td= <%= singular_table_name %>.<%= attribute.name %>.name
+  <% else %>
+          %td= <%= singular_table_name %>.<%= attribute.name %>
+  <% end %>
+<% end -%>
+          %td= link_to t( '.show' ), <%= singular_table_name %>
+          %td= link_to t( '.edit' ), edit_<%= singular_table_name %>_path(<%= singular_table_name %>)
+          %td= link_to t( '.delete' ), <%= singular_table_name %>, data: { confirm: t( '.confirm' ) }, method: :delete

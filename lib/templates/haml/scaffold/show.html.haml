@@ -1,0 +1,18 @@
+.page-header
+  = link_to <%= index_helper %>_path, class: 'btn btn-default' do
+    %span.glyphicon.glyphicon-list-alt
+    = t( '.back' )
+  = link_to edit_<%= singular_table_name %>_path(@<%= singular_table_name %>), class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-pencil
+    = t( '.edit' )
+  %h1= t( '.title' )
+
+%dl.dl-horizontal
+  <%- for attribute in attributes -%>
+  %dt= <%= "t( 'helpers.label.#{singular_table_name}.#{attribute.name}' )" %> + ' :'
+    <% if attribute.type == :references %>
+  %dd= @<%= singular_table_name %>.<%= attribute.name %>.name
+    <% else %>
+  %dd= @<%= singular_table_name %>.<%= attribute.name %>
+    <% end %>
+  <%- end -%>

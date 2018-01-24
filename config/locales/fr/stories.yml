@@ -1,0 +1,29 @@
+---
+fr:
+  stories:
+    index:
+      title: Liste
+      edit: Editer
+      new: Nouvelle
+      show: Détail
+      delete: Suppression
+      confirm: Etes vous sur ?
+    edit:
+      title: Editer
+      back: Retour
+      show: Détail
+    show:
+      title: Détail
+      back: Retour
+      edit: Editer
+    new:
+      title: Ajouter
+      back: Retour
+    form:
+      submit: Valider
+    menu_title: Scénarios
+  helpers:
+    label:
+      story:
+        name: Nom
+        desc: Description

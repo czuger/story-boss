@@ -1,0 +1,28 @@
+.page-header
+  = link_to new_story_path( locale: I18n.locale ), class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    = t( '.new' )
+  %h1= t( '.title' )
+
+.table-responsive
+  %table.table.table-striped.table-bordered.table-hover
+    %thead
+      %tr
+        %th= t( 'helpers.label.story.name' )
+        %th= t( 'helpers.label.story.desc' )
+        %th
+        %th
+        %th
+
+    %tbody
+      - @stories.each do |story|
+        %tr
+  
+          %td= story.name
+  
+  
+          %td= story.desc
+  
+          %td= link_to t( '.show' ), story
+          %td= link_to t( '.edit' ), edit_story_path(story)
+          %td= link_to t( '.delete' ), story, data: { confirm: t( '.confirm' ) }, method: :delete
