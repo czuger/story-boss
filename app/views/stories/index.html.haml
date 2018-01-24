@@ -10,6 +10,7 @@
       %tr
         %th= t( 'helpers.label.story.name' )
         %th= t( 'helpers.label.story.desc' )
+        %th= t( 'helpers.label.story.current' )
         %th
         %th
         %th
@@ -17,11 +18,9 @@
     %tbody
       - @stories.each do |story|
         %tr
-  
           %td= story.name
-  
-  
           %td= story.desc
+          %td= story.current
   
           %td= link_to t( '.show' ), story
           %td= link_to t( '.edit' ), edit_story_path(story)

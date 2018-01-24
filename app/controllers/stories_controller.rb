@@ -4,7 +4,7 @@ class StoriesController < ApplicationController
   # GET /stories
   # GET /stories.json
   def index
-    @stories = Story.all
+    @stories = Story.all.order( 'last_used DESC' )
   end
 
   # GET /stories/1
@@ -25,16 +25,24 @@ class StoriesController < ApplicationController
   # POST /stories.json
   def create
     @story = Story.new(story_params)
+    @story.last_used= Time.now
+    @story.current= true
 
-    respond_to do |format|
-      if @story.save
-        format.html { redirect_to @story, notice: 'Story was successfully created.' }
-        format.json { render :show, status: :created, location: @story }
-      else
-        format.html { render :new }
-        format.json { render json: @story.errors, status: :unprocessable_entity }
+    ActiveRecord::Base.transaction do
+
+      Story.update_all( current: false )
+
+      respond_to do |format|
+        if @story.save
+          format.html { redirect_to @story, notice: 'Story was successfully created.' }
+          format.json { render :show, status: :created, location: @story }
+        else
+          format.html { render :new }
+          format.json { render json: @story.errors, status: :unprocessable_entity }
+        end
       end
     end
+
   end
 
   # PATCH/PUT /stories/1

@@ -6,6 +6,7 @@ fr:
       edit: Editer
       new: Nouveau
       show: Détail
+      current: actuel
       delete: Suppression
       confirm: Etes vous sur ?
     edit:
@@ -22,6 +23,7 @@ fr:
     form:
       submit: Valider
     menu_title: Scénarios
+    current_story: 'Scénario actuel :'
   helpers:
     label:
       story:
