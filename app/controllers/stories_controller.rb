@@ -21,6 +21,20 @@ class StoriesController < ApplicationController
   def edit
   end
 
+  def change_current_story
+    if params[:status] == 'true'
+      story_id = params[:story_id]
+
+      ActiveRecord::Base.transaction do
+        Story.update_all( current: false )
+        story = Story.find( story_id )
+        story.update!( current: true )
+      end
+    end
+
+    head :ok
+  end
+
   # POST /stories
   # POST /stories.json
   def create
