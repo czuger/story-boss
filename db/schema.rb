@@ -10,10 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180124081448) do
+ActiveRecord::Schema.define(version: 20180124082438) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "characters", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.string "desc"
     t.string "character"
     t.datetime "birth"
@@ -23,7 +26,7 @@ ActiveRecord::Schema.define(version: 20180124081448) do
   end
 
   create_table "places", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.string "desc"
     t.string "ambiance"
     t.datetime "created_at", null: false
@@ -31,10 +34,12 @@ ActiveRecord::Schema.define(version: 20180124081448) do
   end
 
   create_table "stories", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.string "desc"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "current", default: false, null: false
+    t.datetime "last_used", null: false
   end
 
 end
