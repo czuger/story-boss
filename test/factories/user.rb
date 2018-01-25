@@ -5,5 +5,6 @@ FactoryBot.define do
       "fof#{n}@bar.com"
     end
     password '123456'
+
   end
 end

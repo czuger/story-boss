@@ -41,6 +41,7 @@ class StoriesController < ApplicationController
     @story = Story.new(story_params)
     @story.last_used= Time.now
     @story.current= true
+    @story.user = current_user
 
     ActiveRecord::Base.transaction do
 

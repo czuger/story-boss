@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180124111645) do
+ActiveRecord::Schema.define(version: 20180125062511) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,7 +40,9 @@ ActiveRecord::Schema.define(version: 20180124111645) do
     t.datetime "updated_at", null: false
     t.boolean "current", default: false, null: false
     t.datetime "last_used", null: false
+    t.bigint "user_id", null: false
     t.index ["current"], name: "index_stories_on_current"
+    t.index ["user_id"], name: "index_stories_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -64,4 +66,5 @@ ActiveRecord::Schema.define(version: 20180124111645) do
     t.index ["uid"], name: "index_users_on_uid"
   end
 
+  add_foreign_key "stories", "users"
 end

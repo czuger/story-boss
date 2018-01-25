@@ -5,8 +5,10 @@ class StoriesControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 
   setup do
-    sign_in create(:user)
-    @story = create( :story )
+    user = create(:user)
+    sign_in user
+
+    @story = create( :story, user: user )
   end
 
   test "should get index" do

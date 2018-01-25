@@ -7,7 +7,12 @@ class ApplicationController < ActionController::Base
   end
 
   def set_current_story
-    @current_story = Story.where( current: true ).first
+    @current_story = Story.where( id: params[ :story_id ] || params[ :id ] ).first
+    @current_story = @current_story || Story.where( current: true ).first
+
+    # p current_user
+
+    raise unless @current_story.user == current_user
   end
 
 end
