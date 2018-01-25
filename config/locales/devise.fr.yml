@@ -43,7 +43,7 @@ fr:
     ##########################################################################################################
     # For generated views: By "rails generate devise_views".
     #                      Assuming to use I18n "Lazy" lookup, except for the ones under "common" namespace.
-    #                      e.g. Under views/devise/confirmations/new.html.erb,
+    #                      e.g. Under views/devise/confirmations/new.html.haml,
     #                           <h2>Resend confirmation instructions</h2>
     #                           is changed to
     #                           <h2><%= t(".resend_confirmation_instructions") %></h2>

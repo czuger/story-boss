@@ -1,16 +1,16 @@
 Rails.application.routes.draw do
 
-
-
-  devise_for :users
   put 'set_locale/:locale', constraints: { locale: /fr/ }, to: 'locales#set'
 
-  resources :places
-  resources :characters
-
-  resources :stories do
-    post :change_current_story
+  devise_for :users do
+    resources :stories do
+      resources :places
+      resources :characters
+      post :change_current_story
+    end
   end
+
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   root 'stories#index'
 
