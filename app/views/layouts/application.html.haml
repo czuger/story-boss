@@ -32,11 +32,11 @@
           %ul.nav.navbar-nav
             %li
               = nav_link( t( 'stories.menu_title' ), stories_path )
-            %li
-              = nav_link( t( 'places.menu_title' ), story_places_path( @current_story ) )
-            %li
-              = nav_link( t( 'characters.menu_title' ), story_characters_path( @current_story ) )
             - if @current_story
+              %li
+                = nav_link( t( 'places.menu_title' ), story_places_path( @current_story ) )
+              %li
+                = nav_link( t( 'characters.menu_title' ), story_characters_path( @current_story ) )
               %li
                 = nav_link( t( 'stories.current_story' ) + ' ' + @current_story.name, edit_story_url( @current_story.id ) )
           #flags-area

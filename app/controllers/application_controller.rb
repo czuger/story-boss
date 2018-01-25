@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
 
     # p current_user
 
-    raise unless @current_story.user == current_user
+    raise if @current_story && @current_story.user != current_user
   end
 
 end
