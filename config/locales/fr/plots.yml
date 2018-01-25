@@ -2,9 +2,9 @@
 fr:
   plots:
     index:
-      title: Liste
+      title: Intrigues
       edit: Editer
-      new: Nouveau
+      new: Nouvelle
       show: Détail
       delete: Suppression
       confirm: Etes vous sur ?
@@ -21,10 +21,9 @@ fr:
       back: Retour
     form:
       submit: Valider
-    menu_title: Plot
+    menu_title: Intrigues
   helpers:
     label:
       plot:
-        name: Name
-        desc: Desc
-        story: Story
+        name: Nom
+        desc: Description
