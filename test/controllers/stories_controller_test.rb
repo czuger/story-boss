@@ -53,9 +53,21 @@ class StoriesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should not edit bob story" do
+    assert_raise do
+      get edit_story_url(@bobstory)
+    end
+  end
+
   test "should update story" do
     patch story_url(@story), params: { story: { desc: @story.desc, name: @story.name } }
     assert_redirected_to story_url(@story)
+  end
+
+  test "should not update bob story" do
+    assert_raise do
+      patch story_url(@bobstory)
+    end
   end
 
   test "should destroy story" do
@@ -64,5 +76,11 @@ class StoriesControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to stories_url
+  end
+
+  test "should not destroy bob story" do
+    assert_raise do
+      delete story_url(@bobstory)
+    end
   end
 end

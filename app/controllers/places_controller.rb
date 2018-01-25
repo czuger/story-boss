@@ -4,7 +4,7 @@ class PlacesController < ApplicationController
   # GET /places
   # GET /places.json
   def index
-    @places = Place.all
+    @places = Place.where( story_id: @current_story.id ).order( 'name' )
   end
 
   # GET /places/1
