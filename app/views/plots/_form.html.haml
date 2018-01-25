@@ -20,10 +20,16 @@
     .col-sm-10
       = f.text_area :desc, class: 'form-control'
 
-  - @characters.each do |character|
-    %button.characters_btn.btn-primary.btn{ type: :button, c_id: character.id }
-      = character.name
-      = hidden_field_tag "character_id[][#{character.id}]", false
+  .button_row_frame
+    %h4= t( 'plots.form.linked_chars' )
+    - @characters.in_groups_of( 4 ) do |group|
+      .row
+        - group.each do |character|
+          - if character
+            .col-sm-3.button_frame
+              %button.characters_btn.btn-secondary.btn.col-sm-11{ type: :button, c_id: character.id }
+                = character.name
+                = hidden_field_tag "character_ids[#{character.id}]", false
 
   .form-group
     .col-sm-offset-2.col-sm-10

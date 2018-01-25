@@ -15,12 +15,12 @@ class PlotsController < ApplicationController
   # GET /plots/new
   def new
     @plot = Plot.new
-    @characters = @plot.story.characters
+    @characters = @current_story.characters
   end
 
   # GET /plots/1/edit
   def edit
-    @characters = @plot.story.characters
+    @characters = @current_story.characters
   end
 
   # POST /plots
@@ -31,6 +31,8 @@ class PlotsController < ApplicationController
 
     respond_to do |format|
       if @plot.save
+        set_linked_characters
+
         format.html { redirect_to [ @current_story, @plot ], notice: 'Plot was successfully created.' }
         format.json { render :show, status: :created, location: @plot }
       else
@@ -45,6 +47,8 @@ class PlotsController < ApplicationController
   def update
     respond_to do |format|
       if @plot.update(plot_params)
+        set_linked_characters
+
         format.html { redirect_to [@current_story, @plot], notice: 'Plot was successfully updated.' }
         format.json { render :show, status: :ok, location: @plot }
       else
@@ -72,6 +76,17 @@ class PlotsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def plot_params
-      params.require(:plot).permit(:name, :desc)
+      params.require(:plot).permit( :name, :desc )
+    end
+
+    def set_linked_characters
+      character_ids = params[:character_ids].to_unsafe_h
+      to_update_character_ids = character_ids.to_a.map{ |e| e[0].to_i if e[1] == 'true' }.compact
+
+      # We set only the intersection of the requested characters ids and the current story characters ids
+      # to avoid characters stealing.
+      available_character_ids = @current_story.characters.pluck(:id)
+      @plot.character_ids = to_update_character_ids & available_character_ids
+      @plot.save!
     end
 end

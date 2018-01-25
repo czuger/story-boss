@@ -21,6 +21,7 @@ fr:
       back: Retour
     form:
       submit: Valider
+      linked_chars: "Personnes liées à l'intrigue"
     menu_title: Intrigues
   helpers:
     label:

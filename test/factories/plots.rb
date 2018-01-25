@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :plot do
-    name "MyString"
-    desc "MyString"
-    story nil
+    sequence :name do |n|
+      "My plot n #{n}"
+    end
   end
 end

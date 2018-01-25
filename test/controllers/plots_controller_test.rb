@@ -9,12 +9,19 @@ class PlotsControllerTest < ActionDispatch::IntegrationTest
     sign_in user
 
     @story = create( :story, user: user )
-    @plot = create(:plot, story: @story )
+    @plot = create(:plot, story: @story, name: 'regular plot' )
+
+    c1 = create( :character, story: @story )
+    @c2 = create( :character, story: @story )
+
+    @goodcharacters = { c1.id => 'false', @c2.id => 'true' }
 
     # Rubbish to be sure that we are not messing with other users
     bob = create(:user)
     @bobstory = create( :story, user: bob )
-    @bobplot = create(:plot, story: @bobstory )
+    @bobplot = create(:plot, story: @bobstory, name: 'bob plot' )
+
+    @c3 = create( :character, story: @bobstory )
   end
 
   test "should get index" do
@@ -33,7 +40,7 @@ class PlotsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create plot" do
     assert_difference('Plot.count') do
-      post story_plots_url( @story ), params: { plot: { desc: @plot.desc, name: @plot.name, story_id: @plot.story_id } }
+      post story_plots_url( @story ), params: { character_ids: @goodcharacters, plot: { desc: @plot.desc, name: @plot.name } }
     end
 
     assert_redirected_to story_plot_url(@story, Plot.last)
@@ -41,7 +48,7 @@ class PlotsControllerTest < ActionDispatch::IntegrationTest
 
   test "should not create bob plot" do
     assert_raise do
-      post story_plots_url(@bobstory), params: { plot: { desc: @plot.desc, name: @plot.name, story_id: @plot.story_id } }
+      post story_plots_url(@bobstory), params: { plot: { desc: @plot.desc, name: @plot.name } }
     end
   end
 
@@ -64,7 +71,24 @@ class PlotsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update plot" do
-    patch story_plot_url(@story, @plot), params: { plot: { desc: @plot.desc, name: @plot.name, story_id: @plot.story_id } }
+    assert_difference('@plot.characters.count') do
+      patch story_plot_url(@story, @plot), params: { character_ids: @goodcharacters, plot: { desc: @plot.desc, name: @plot.name, story_id: @plot.story_id } }
+    end
+    assert_redirected_to story_plot_url(@story, @plot)
+
+    @goodcharacters[@c2.id]='false'
+    assert_difference('@plot.characters.count', -1) do
+      patch story_plot_url(@story, @plot), params: { character_ids: @goodcharacters, plot: { desc: @plot.desc, name: @plot.name, story_id: @plot.story_id } }
+    end
+    assert_redirected_to story_plot_url(@story, @plot)
+  end
+
+  test "should not allow to steal bob characters" do
+    bad_characters = @goodcharacters
+    bad_characters[@c3.id] = 'true'
+    assert_difference('@plot.characters.count') do
+      patch story_plot_url(@story, @plot), params: { character_ids: @goodcharacters, plot: { desc: @plot.desc, name: @plot.name, story_id: @plot.story_id } }
+    end
     assert_redirected_to story_plot_url(@story, @plot)
   end
 
