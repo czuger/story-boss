@@ -1,8 +1,8 @@
 .page-header
-  = link_to plots_path, class: 'btn btn-default' do
+  = link_to story_plots_path( @current_story ), class: 'btn btn-default' do
     %span.glyphicon.glyphicon-list-alt
     = t( '.back' )
-  = link_to edit_plot_path(@plot), class: 'btn btn-primary' do
+  = link_to edit_story_plot_path(@current_story,@plot), class: 'btn btn-primary' do
     %span.glyphicon.glyphicon-pencil
     = t( '.edit' )
   %h1= t( '.title' )

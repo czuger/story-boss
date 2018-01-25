@@ -31,10 +31,10 @@
         #navbar.collapse.navbar-collapse
           %ul.nav.navbar-nav
             %li
-              = nav_link( t( 'plots.menu_title' ), plots_path )
-            %li
               = nav_link( t( 'stories.menu_title' ), stories_path )
             - if @current_story
+              %li
+                = nav_link( t( 'plots.menu_title' ), story_plots_path( @current_story ) )
               %li
                 = nav_link( t( 'places.menu_title' ), story_places_path( @current_story ) )
               %li

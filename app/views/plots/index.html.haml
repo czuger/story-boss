@@ -1,5 +1,5 @@
 .page-header
-  = link_to new_plot_path( locale: I18n.locale ), class: 'btn btn-primary' do
+  = link_to new_story_plot_path( @current_story, locale: I18n.locale ), class: 'btn btn-primary' do
     %span.glyphicon.glyphicon-plus
     = t( '.new' )
   %h1= t( '.title' )
@@ -27,6 +27,6 @@
   
           %td= plot.story.name
   
-          %td= link_to t( '.show' ), plot
-          %td= link_to t( '.edit' ), edit_plot_path(plot)
-          %td= link_to t( '.delete' ), plot, data: { confirm: t( '.confirm' ) }, method: :delete
+          -#%td= link_to t( '.show' ), plot
+          %td= link_to t( '.edit' ), edit_story_plot_path(@current_story, plot)
+          %td= link_to t( '.delete' ), [ @current_story, plot ], data: { confirm: t( '.confirm' ) }, method: :delete

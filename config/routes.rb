@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
 
-  resources :plots
   put 'set_locale/:locale', constraints: { locale: /fr/ }, to: 'locales#set'
 
   resources :stories do
     resources :places
     resources :characters
+    resources :plots
+
     post :change_current_story
   end
 
