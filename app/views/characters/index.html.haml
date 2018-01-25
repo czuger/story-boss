@@ -1,5 +1,5 @@
 .page-header
-  = link_to new_character_path( locale: I18n.locale ), class: 'btn btn-primary' do
+  = link_to new_story_character_path( @current_story, locale: I18n.locale ), class: 'btn btn-primary' do
     %span.glyphicon.glyphicon-plus
     = t( '.new' )
   %h1= t( '.title' )
@@ -35,6 +35,6 @@
   
           %td= character.death
   
-          %td= link_to t( '.show' ), character
-          %td= link_to t( '.edit' ), edit_character_path(character)
-          %td= link_to t( '.delete' ), character, data: { confirm: t( '.confirm' ) }, method: :delete
+          -#%td= link_to t( '.show' ), character
+          %td= link_to t( '.edit' ), edit_story_character_path(@current_story, character)
+          %td= link_to t( '.delete' ), story_character_url( @current_story, character ), data: { confirm: t( '.confirm' ) }, method: :delete

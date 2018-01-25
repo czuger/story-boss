@@ -1,8 +1,12 @@
 require 'test_helper'
 
 class StoriesControllerTest < ActionDispatch::IntegrationTest
+
+  include Devise::Test::IntegrationHelpers
+
   setup do
-    @story = stories(:one)
+    sign_in create(:user)
+    @story = create( :story )
   end
 
   test "should get index" do

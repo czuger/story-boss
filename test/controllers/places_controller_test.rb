@@ -1,48 +1,54 @@
 require 'test_helper'
 
 class PlacesControllerTest < ActionDispatch::IntegrationTest
+
+  include Devise::Test::IntegrationHelpers
+
   setup do
-    @place = places(:one)
+    sign_in create(:user)
+
+    @story = create(:story)
+    @place = create(:place)
   end
 
   test "should get index" do
-    get places_url
+    get story_places_url( @story )
     assert_response :success
   end
 
   test "should get new" do
-    get new_place_url
+    get new_story_place_url( @story, @place )
     assert_response :success
   end
 
   test "should create place" do
     assert_difference('Place.count') do
-      post places_url, params: { place: { ambiance: @place.ambiance, desc: @place.desc, name: @place.name } }
+      post story_places_url( @story ), params: { place: { ambiance: @place.ambiance, desc: @place.desc, name: @place.name } }
     end
 
-    assert_redirected_to place_url(Place.last)
+    assert_redirected_to story_place_url(@story, Place.last)
   end
 
   test "should show place" do
-    get place_url(@place)
+    get story_place_url(@story, @place)
     assert_response :success
   end
 
   test "should get edit" do
-    get edit_place_url(@place)
+    get edit_story_place_url(@story, @place)
     assert_response :success
   end
 
   test "should update place" do
-    patch place_url(@place), params: { place: { ambiance: @place.ambiance, desc: @place.desc, name: @place.name } }
-    assert_redirected_to place_url(@place)
+    patch story_place_url(@story, @place), params: { place: { ambiance: @place.ambiance, desc: @place.desc, name: @place.name } }
+    assert_redirected_to story_place_url(@story, @place)
   end
 
   test "should destroy place" do
     assert_difference('Place.count', -1) do
-      delete place_url(@place)
+      delete story_place_url(@story, @place)
     end
 
-    assert_redirected_to places_url
+    assert_redirected_to story_places_url(@story)
   end
 end

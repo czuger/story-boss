@@ -1,5 +1,5 @@
 .page-header
-  = link_to new_place_path( locale: I18n.locale ), class: 'btn btn-primary' do
+  = link_to new_story_place_path( @current_story, locale: I18n.locale ), class: 'btn btn-primary' do
     %span.glyphicon.glyphicon-plus
     = t( '.new' )
   %h1= t( '.title' )
@@ -27,6 +27,6 @@
   
           %td= place.ambiance
   
-          %td= link_to t( '.show' ), place
-          %td= link_to t( '.edit' ), edit_place_path(place)
-          %td= link_to t( '.delete' ), place, data: { confirm: t( '.confirm' ) }, method: :delete
+          -#%td= link_to t( '.show' ), place
+          %td= link_to t( '.edit' ), new_story_place_path( @current_story, place )
+          %td= link_to t( '.delete' ), story_place_path( @current_story, place ), data: { confirm: t( '.confirm' ) }, method: :delete
