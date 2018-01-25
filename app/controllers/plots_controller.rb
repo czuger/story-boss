@@ -15,10 +15,12 @@ class PlotsController < ApplicationController
   # GET /plots/new
   def new
     @plot = Plot.new
+    @characters = @plot.story.characters
   end
 
   # GET /plots/1/edit
   def edit
+    @characters = @plot.story.characters
   end
 
   # POST /plots

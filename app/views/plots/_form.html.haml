@@ -13,24 +13,20 @@
   .form-group
     = f.label :name, class: 'col-sm-2 control-label'
     .col-sm-10
-      
       = f.text_field :name, class: 'form-control'
-      
 
   .form-group
     = f.label :desc, class: 'col-sm-2 control-label'
     .col-sm-10
-      
       = f.text_area :desc, class: 'form-control'
-      
 
-  -#.form-group
-  -#  = f.label :story, class: 'col-sm-2 control-label'
-  -#  .col-sm-10
-  -#
-  -#    = f.collection_select :story_id, Story.all, :id, :name, { prompt: true }, { class: 'form-control' }
-      
+  - @characters.each do |character|
+    %button.characters_btn.btn-primary.btn{ type: :button, c_id: character.id }
+      = character.name
+      = hidden_field_tag "character_id[][#{character.id}]", false
 
   .form-group
     .col-sm-offset-2.col-sm-10
       = f.submit class: 'btn btn-primary', value: t( '.submit' ), 'data-disable-with' => t( '.submit' )
+
+= hidden_field_tag :character_buttons, true
