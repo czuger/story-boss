@@ -1,0 +1,32 @@
+.page-header
+  = link_to new_plot_path( locale: I18n.locale ), class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-plus
+    = t( '.new' )
+  %h1= t( '.title' )
+
+.table-responsive
+  %table.table.table-striped.table-bordered.table-hover
+    %thead
+      %tr
+        %th= t( 'helpers.label.plot.name' )
+        %th= t( 'helpers.label.plot.desc' )
+        %th= t( 'helpers.label.plot.story' )
+        %th
+        %th
+        %th
+
+    %tbody
+      - @plots.each do |plot|
+        %tr
+  
+          %td= plot.name
+  
+  
+          %td= plot.desc
+  
+  
+          %td= plot.story.name
+  
+          %td= link_to t( '.show' ), plot
+          %td= link_to t( '.edit' ), edit_plot_path(plot)
+          %td= link_to t( '.delete' ), plot, data: { confirm: t( '.confirm' ) }, method: :delete

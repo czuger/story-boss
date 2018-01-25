@@ -1,0 +1,30 @@
+---
+fr:
+  plots:
+    index:
+      title: Liste
+      edit: Editer
+      new: Nouveau
+      show: Détail
+      delete: Suppression
+      confirm: Etes vous sur ?
+    edit:
+      title: Editer
+      back: Retour
+      show: Détail
+    show:
+      title: Détail
+      back: Retour
+      edit: Editer
+    new:
+      title: Ajouter
+      back: Retour
+    form:
+      submit: Valider
+    menu_title: Plot
+  helpers:
+    label:
+      plot:
+        name: Name
+        desc: Desc
+        story: Story
