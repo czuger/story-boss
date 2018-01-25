@@ -12,7 +12,9 @@ class ApplicationController < ActionController::Base
 
     # p current_user
 
-    raise if @current_story && @current_story.user != current_user
+    if @current_story && @current_story.user != current_user
+      raise "Trying to read a story that is not owned by user : #{@current_story.user.email}, #{current_user.email}"
+    end
   end
 
 end

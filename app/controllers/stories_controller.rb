@@ -4,7 +4,7 @@ class StoriesController < ApplicationController
   # GET /stories
   # GET /stories.json
   def index
-    @stories = Story.all.order( 'last_used DESC' )
+    @stories = Story.where(user_id: current_user.id).order( 'last_used DESC' )
   end
 
   # GET /stories/1

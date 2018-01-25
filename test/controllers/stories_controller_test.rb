@@ -9,11 +9,19 @@ class StoriesControllerTest < ActionDispatch::IntegrationTest
     sign_in user
 
     @story = create( :story, user: user )
+
+    # Rubbish to be sure that we are not messing with other users
+    bob = create(:user)
+    @bobstory = create( :story, user: bob )
   end
 
   test "should get index" do
     get stories_url
     assert_response :success
+
+    get stories_url( format: :json )
+    # Ensuring that we get only one story (that we does not get bob story)
+    assert_equal 1, JSON.parse( response.body ).count
   end
 
   test "should get new" do
@@ -32,6 +40,12 @@ class StoriesControllerTest < ActionDispatch::IntegrationTest
   test "should show story" do
     get story_url(@story)
     assert_response :success
+  end
+
+  test "should not show bob story" do
+    assert_raise do
+      get story_url(@bobstory)
+    end
   end
 
   test "should get edit" do

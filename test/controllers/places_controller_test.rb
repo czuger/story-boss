@@ -8,8 +8,9 @@ class PlacesControllerTest < ActionDispatch::IntegrationTest
     user = create(:user)
     sign_in user
 
-    @place = create(:place)
     @story = create( :story, user: user )
+    @place = create(:place, story: @story )
+
   end
 
   test "should get index" do

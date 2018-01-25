@@ -25,6 +25,7 @@ class PlacesController < ApplicationController
   # POST /places.json
   def create
     @place = Place.new(place_params)
+    @place.story = @current_story
 
     respond_to do |format|
       if @place.save
