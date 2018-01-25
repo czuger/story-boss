@@ -16,11 +16,13 @@ class PlotsController < ApplicationController
   def new
     @plot = Plot.new
     @characters = @current_story.characters
+    @selected_character_ids = []
   end
 
   # GET /plots/1/edit
   def edit
     @characters = @current_story.characters
+    @selected_character_ids = @plot.characters.pluck(:id)
   end
 
   # POST /plots
@@ -80,7 +82,7 @@ class PlotsController < ApplicationController
     end
 
     def set_linked_characters
-      character_ids = params[:character_ids].to_unsafe_h
+      character_ids = params[:character_id].to_unsafe_h
       to_update_character_ids = character_ids.to_a.map{ |e| e[0].to_i if e[1] == 'true' }.compact
 
       # We set only the intersection of the requested characters ids and the current story characters ids

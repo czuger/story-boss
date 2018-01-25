@@ -27,9 +27,9 @@
         - group.each do |character|
           - if character
             .col-sm-3.button_frame
-              %button.characters_btn.btn-secondary.btn.col-sm-11{ type: :button, c_id: character.id }
+              %button.characters_btn.btn.col-sm-11{ type: :button, c_id: character.id, class: character_button_class( character ) }
                 = character.name
-                = hidden_field_tag "character_ids[#{character.id}]", false
+                = hidden_field_tag "character_id[#{character.id}]", @selected_character_ids.include?( character.id )
 
   .form-group
     .col-sm-offset-2.col-sm-10

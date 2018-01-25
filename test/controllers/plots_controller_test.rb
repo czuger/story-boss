@@ -40,7 +40,7 @@ class PlotsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create plot" do
     assert_difference('Plot.count') do
-      post story_plots_url( @story ), params: { character_ids: @goodcharacters, plot: { desc: @plot.desc, name: @plot.name } }
+      post story_plots_url( @story ), params: { character_id: @goodcharacters, plot: { desc: @plot.desc, name: @plot.name } }
     end
 
     assert_redirected_to story_plot_url(@story, Plot.last)
@@ -72,13 +72,13 @@ class PlotsControllerTest < ActionDispatch::IntegrationTest
 
   test "should update plot" do
     assert_difference('@plot.characters.count') do
-      patch story_plot_url(@story, @plot), params: { character_ids: @goodcharacters, plot: { desc: @plot.desc, name: @plot.name, story_id: @plot.story_id } }
+      patch story_plot_url(@story, @plot), params: { character_id: @goodcharacters, plot: { desc: @plot.desc, name: @plot.name, story_id: @plot.story_id } }
     end
     assert_redirected_to story_plot_url(@story, @plot)
 
     @goodcharacters[@c2.id]='false'
     assert_difference('@plot.characters.count', -1) do
-      patch story_plot_url(@story, @plot), params: { character_ids: @goodcharacters, plot: { desc: @plot.desc, name: @plot.name, story_id: @plot.story_id } }
+      patch story_plot_url(@story, @plot), params: { character_id: @goodcharacters, plot: { desc: @plot.desc, name: @plot.name, story_id: @plot.story_id } }
     end
     assert_redirected_to story_plot_url(@story, @plot)
   end
@@ -87,7 +87,7 @@ class PlotsControllerTest < ActionDispatch::IntegrationTest
     bad_characters = @goodcharacters
     bad_characters[@c3.id] = 'true'
     assert_difference('@plot.characters.count') do
-      patch story_plot_url(@story, @plot), params: { character_ids: @goodcharacters, plot: { desc: @plot.desc, name: @plot.name, story_id: @plot.story_id } }
+      patch story_plot_url(@story, @plot), params: { character_id: @goodcharacters, plot: { desc: @plot.desc, name: @plot.name, story_id: @plot.story_id } }
     end
     assert_redirected_to story_plot_url(@story, @plot)
   end
