@@ -4,7 +4,7 @@ class CharactersController < ApplicationController
   # GET /characters
   # GET /characters.json
   def index
-    @characters = Character.all
+    @characters = Character.where( story_id: @current_story.id ).order( 'name' )
   end
 
   # GET /characters/1
@@ -25,6 +25,7 @@ class CharactersController < ApplicationController
   # POST /characters.json
   def create
     @character = Character.new(character_params)
+    @character.story = @current_story
 
     respond_to do |format|
       if @character.save
