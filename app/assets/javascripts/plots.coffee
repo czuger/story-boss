@@ -12,11 +12,11 @@ ready = () ->
 
     if c_data.val() == 'true'
       c_data.val('false')
-      button.removeClass('btn-warning')
+      button.removeClass('btn-primary')
       button.addClass('btn-secondary')
     else
       c_data.val('true')
       button.removeClass('btn-secondary')
-      button.addClass('btn-warning')
+      button.addClass('btn-primary')
 
 $(document).on 'turbolinks:load', ready
