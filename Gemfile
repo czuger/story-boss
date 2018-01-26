@@ -58,7 +58,6 @@ group :development do
   gem 'capistrano-rails', '~> 1.3'
   gem 'capistrano-rbenv', '~> 2.1'
   gem 'capistrano3-puma'
-  gem 'toronto', path: '../toronto'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -70,3 +69,5 @@ gem 'jquery-rails'
 gem 'devise'
 gem 'omniauth-facebook'
 # gem 'd3-rails'
+
+gem 'toronto'
