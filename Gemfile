@@ -70,4 +70,4 @@ gem 'devise'
 gem 'omniauth-facebook'
 # gem 'd3-rails'
 
-gem 'toronto'
+gem 'toronto', '0.0.4'
