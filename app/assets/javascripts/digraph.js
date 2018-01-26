@@ -7,7 +7,7 @@ $(document).on( "turbolinks:load", function() {
     var color = d3.scaleOrdinal(d3.schemeCategory20);
 
     var simulation = d3.forceSimulation()
-        .force("link", d3.forceLink().id(function(d) { return d.id; }))
+        .force("link", d3.forceLink().id(function(d) { return d.id; }).distance(100))
         .force("charge", d3.forceManyBody())
         .force("center", d3.forceCenter(width / 2, height / 2));
 
@@ -19,7 +19,8 @@ $(document).on( "turbolinks:load", function() {
             .selectAll("line")
             .data(graph.links)
             .enter().append("line")
-            .attr("stroke-width", function(d) { return Math.sqrt(d.value); });
+            .attr("stroke-width", function(d) { return Math.sqrt(d.value); })
+            .attr('distance', 50);
 
         var node = svg.append("g")
             .attr("class", "nodes")
@@ -34,7 +35,12 @@ $(document).on( "turbolinks:load", function() {
                 .on("end", dragended));
 
         node.append("title")
-            .text(function(d) { return d.id; });
+            .text(function(d) { return d.name; });
+
+        node.append("text")
+            .attr("dx", 12)
+            .attr("dy", ".35em")
+            .text(function(d) { return d.name; });
 
         simulation
             .nodes(graph.nodes)
@@ -42,6 +48,7 @@ $(document).on( "turbolinks:load", function() {
 
         simulation.force("link")
             .links(graph.links);
+
 
         function ticked() {
             link

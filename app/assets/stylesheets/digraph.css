@@ -7,3 +7,9 @@
     stroke: #fff;
     stroke-width: 1.5px;
 }
+
+.node text {
+    color: white;
+    pointer-events: none;
+    font: 10px sans-serif;
+}

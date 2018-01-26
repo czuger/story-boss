@@ -11,8 +11,8 @@ class PlotsController < ApplicationController
   # GET /plots/1
   # GET /plots/1.json
   def show
-    nodes = [ { id: 'plot_' + @plot.id.to_s, group: '1' } ]
-    nodes += @plot.characters.map{ |e| { id: 'char_' + e.id.to_s, group: '2'  } }
+    nodes = [ { id: 'plot_' + @plot.id.to_s, group: '1', name: @plot.name } ]
+    nodes += @plot.characters.map{ |e| { id: 'char_' + e.id.to_s, group: '2', name: e.name } }
     links = @plot.characters.map{ |e| { source: 'plot_' + @plot.id.to_s, target: 'char_' + e.id.to_s, value: 1 } }
     @graph = { nodes: nodes, links: links }
   end
