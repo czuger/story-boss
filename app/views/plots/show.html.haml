@@ -19,4 +19,7 @@
   %dt= t( 'helpers.label.plot.story' ) + ' :'
     
   %dd= @plot.story.name
-    
+
+%svg{ width: "960", height: "600" }
+
+= hidden_field_tag :graph, @graph.to_json

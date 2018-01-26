@@ -1,5 +1,6 @@
 class CharactersController < ApplicationController
   before_action :set_character, only: [:show, :edit, :update, :destroy]
+  before_action :set_current_story
 
   # GET /characters
   # GET /characters.json

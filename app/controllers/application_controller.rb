@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :set_locale, :authenticate_user!, :set_current_story
+  before_action :set_locale, :authenticate_user!
   protect_from_forgery with: :exception
 
   def set_locale

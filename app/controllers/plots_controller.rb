@@ -1,5 +1,6 @@
 class PlotsController < ApplicationController
   before_action :set_plot, only: [:show, :edit, :update, :destroy]
+  before_action :set_current_story
 
   # GET /plots
   # GET /plots.json
@@ -10,6 +11,10 @@ class PlotsController < ApplicationController
   # GET /plots/1
   # GET /plots/1.json
   def show
+    nodes = [ { id: 'plot_' + @plot.id.to_s, group: '1' } ]
+    nodes += @plot.characters.map{ |e| { id: 'char_' + e.id.to_s, group: '2'  } }
+    links = @plot.characters.map{ |e| { source: 'plot_' + @plot.id.to_s, target: 'char_' + e.id.to_s, value: 1 } }
+    @graph = { nodes: nodes, links: links }
   end
 
   # GET /plots/new
@@ -65,7 +70,7 @@ class PlotsController < ApplicationController
   def destroy
     @plot.destroy
     respond_to do |format|
-      format.html { redirect_to story_plots_url(@current_story), notice: 'Plot was successfully destroyed.' }
+      format.html { redirect_to plot_plots_url(@current_story), notice: 'Plot was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

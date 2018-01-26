@@ -64,3 +64,4 @@ gem 'jquery-rails'
 
 gem 'devise'
 gem 'omniauth-facebook'
+# gem 'd3-rails'
