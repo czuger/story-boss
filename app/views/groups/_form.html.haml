@@ -51,8 +51,6 @@
                 = character.name
                 = hidden_field_tag "character_id[#{character.id}]", @selected_character_ids.include?( character.id )
 
-      
-
   .form-group
     .col-sm-offset-2.col-sm-10
       = f.submit class: 'btn btn-primary', value: t( '.submit' ), 'data-disable-with' => t( '.submit' )
