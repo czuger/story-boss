@@ -5,7 +5,7 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
-    @groups = Group.all
+    @groups = Group.where( story_id: @current_story.id ).order( 'name' )
   end
 
   # GET /groups/1

@@ -10,11 +10,21 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
 
     @story = create( :story, user: user )
     @group = create( :group, story: @story )
+
+    # Rubbish to be sure that we are not messing with other users
+    bob = create(:user)
+    @bobstory = create( :story, user: bob )
+    @bobgroup = create(:group, story: @bobstory, name: 'bob group' )
+
   end
 
   test "should get index" do
     get story_groups_url(@story)
     assert_response :success
+
+    get story_groups_url( @story, format: :json )
+    # Ensuring that we get only one story (that we does not get bob story)
+    assert_equal 1, JSON.parse( response.body ).count
   end
 
   test "should get new" do
