@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180125080409) do
+ActiveRecord::Schema.define(version: 20180201104923) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,16 @@ ActiveRecord::Schema.define(version: 20180125080409) do
     t.bigint "plot_id", null: false
     t.bigint "character_id", null: false
     t.index ["plot_id"], name: "index_characters_plots_on_plot_id"
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.bigint "story_id", null: false
+    t.string "name"
+    t.string "desc"
+    t.integer "groupe_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["story_id"], name: "index_groups_on_story_id"
   end
 
   create_table "places", force: :cascade do |t|
@@ -86,6 +96,7 @@ ActiveRecord::Schema.define(version: 20180125080409) do
   end
 
   add_foreign_key "characters", "stories"
+  add_foreign_key "groups", "stories"
   add_foreign_key "places", "stories"
   add_foreign_key "plots", "stories"
   add_foreign_key "stories", "users"

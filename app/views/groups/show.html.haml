@@ -1,0 +1,23 @@
+.page-header
+  = link_to groups_path, class: 'btn btn-default' do
+    %span.glyphicon.glyphicon-list-alt
+    = t( '.back' )
+  = link_to edit_group_path(@group), class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-pencil
+    = t( '.edit' )
+  %h1= t( '.title' )
+
+%dl.dl-horizontal
+
+  %dt= t( 'helpers.label.group.name' ) + ' :'
+    
+  %dd= @group.name
+    
+  %dt= t( 'helpers.label.group.desc' ) + ' :'
+    
+  %dd= @group.desc
+    
+  %dt= t( 'helpers.label.group.groupe_type' ) + ' :'
+    
+  %dd= @group.groupe_type
+    

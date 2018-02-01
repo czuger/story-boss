@@ -70,7 +70,7 @@ class PlotsController < ApplicationController
   def destroy
     @plot.destroy
     respond_to do |format|
-      format.html { redirect_to plot_plots_url(@current_story), notice: 'Plot was successfully destroyed.' }
+      format.html { redirect_to story_plots_path(@current_story), notice: 'Plot was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

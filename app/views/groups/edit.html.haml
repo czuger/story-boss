@@ -1,0 +1,10 @@
+.page-header
+  = link_to groups_path, class: 'btn btn-default' do
+    %span.glyphicon.glyphicon-list-alt
+    = t( '.back' )
+  = link_to @group, class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-info-sign
+    = t( '.show' )
+  %h1= t( '.title' )
+
+= render 'form'
