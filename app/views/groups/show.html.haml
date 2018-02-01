@@ -16,5 +16,5 @@
   %dd= @group.desc
     
   %dt= t( 'helpers.label.group.groupe_type' ) + ' :'
-  %dd= @group.groupe_type
+  %dd= t( 'groups.types.' + Group::TYPE_INT_CONVERSION[ @group.groupe_type ] )
     

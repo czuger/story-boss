@@ -8,11 +8,9 @@
   %table.table.table-striped.table-bordered.table-hover
     %thead
       %tr
-        %th= t( 'helpers.label.group.references' )
         %th= t( 'helpers.label.group.name' )
         %th= t( 'helpers.label.group.desc' )
         %th= t( 'helpers.label.group.groupe_type' )
-        %th
         %th
         %th
 
@@ -21,7 +19,7 @@
         %tr
           %td= group.name
           %td= group.desc
-          %td= group.groupe_type
+          %td= t( 'groups.types.' + Group::TYPE_INT_CONVERSION[ group.groupe_type ] )
 
           %td= link_to t( '.edit' ), edit_story_group_path(@current_story, group)
           %td= link_to t( '.delete' ), [ @current_story, group ], data: { confirm: t( '.confirm' ) }, method: :delete

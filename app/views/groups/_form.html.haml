@@ -19,13 +19,26 @@
   .form-group
     = f.label :desc, class: 'col-sm-2 control-label'
     .col-sm-10
-      = f.text_field :desc, class: 'form-control'
+      = f.text_area :desc, class: 'form-control'
       
 
   .form-group
     = f.label :groupe_type, class: 'col-sm-2 control-label'
-    .col-sm-10
-      = f.number_field :groupe_type, class: 'form-control'
+    .col-sm-2
+      .input-group
+        %span{ class: 'input-group-addon' }
+          = f.radio_button( :groupe_type, 1 )
+          = t( 'groups.types.crew' )
+    .col-sm-2
+      .input-group
+        %span{ class: 'input-group-addon' }
+          = f.radio_button( :groupe_type, 2 )
+          = t( 'groups.types.friends' )
+    .col-sm-2
+      .input-group
+        %span{ class: 'input-group-addon' }
+          = f.radio_button( :groupe_type, 3 )
+          = t( 'groups.types.organisation' )
       
 
   .form-group

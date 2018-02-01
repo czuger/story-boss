@@ -21,11 +21,14 @@ fr:
       back: Retour
     form:
       submit: Valider
-    menu_title: group
+    menu_title: Groupes
+    types:
+      crew: Bande
+      organisation: Organisation
+      friends: Amis
   helpers:
     label:
       group:
-        references: References
-        name: Name
-        desc: Desc
-        groupe_type: Groupe type
+        name: Nom
+        desc: Description
+        groupe_type: Type de groupe
