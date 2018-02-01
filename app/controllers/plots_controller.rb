@@ -11,10 +11,24 @@ class PlotsController < ApplicationController
   # GET /plots/1
   # GET /plots/1.json
   def show
-    nodes = [ { id: 'plot_' + @plot.id.to_s, group: '1', name: @plot.name } ]
-    nodes += @plot.characters.map{ |e| { id: 'char_' + e.id.to_s, group: '2', name: e.name } }
-    links = @plot.characters.map{ |e| { source: 'plot_' + @plot.id.to_s, target: 'char_' + e.id.to_s, value: 1 } }
-    @graph = { nodes: nodes, links: links }
+    @nodes = [ { id: 'plot_' + @plot.id.to_s, group: '1', name: @plot.name } ]
+    @plot.characters.each do |c|
+      link_item( 'plot_' + @plot.id.to_s, { id: 'char_' + c.id.to_s, group: '2', name: c.name } )
+    end
+
+    @plot.characters.each do |c|
+      c.groups.each do |group|
+        @nodes << { id: 'group_' + group.id.to_s, group: '3', name: group.name }
+        @links << { source: 'char_' + c.id.to_s, target: 'group_' + group.id.to_s, value: 1 }
+
+        group.characters.each do |connected_c|
+          link_item( 'group_' + group.id.to_s, { id: 'char_' + connected_c.id.to_s, group: '2', name: connected_c.name } )
+        end
+        
+      end
+    end
+
+    @graph = { nodes: @nodes, links: @links }
   end
 
   # GET /plots/new
@@ -95,5 +109,16 @@ class PlotsController < ApplicationController
       available_character_ids = @current_story.characters.pluck(:id)
       @plot.character_ids = to_update_character_ids & available_character_ids
       @plot.save!
+    end
+
+    def link_item( source_id, data )
+      @items_already_in_graph ||= []
+      @links ||= []
+
+      return if @items_already_in_graph.include?( data[:id ] )
+
+      @nodes << data
+      @links << { source: source_id, target: data[:id], value: 1 }
+      @items_already_in_graph << data[:id ]
     end
 end
