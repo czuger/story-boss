@@ -31,8 +31,6 @@
         #navbar.collapse.navbar-collapse
           %ul.nav.navbar-nav
             %li
-              = nav_link( t( 'groups.menu_title' ), groups_path )
-            %li
               = nav_link( t( 'stories.menu_title' ), stories_path )
             - if @current_story
               %li
@@ -43,6 +41,8 @@
                 = nav_link( t( 'characters.menu_title' ), story_characters_path( @current_story ) )
               %li
                 = nav_link( t( 'stories.current_story' ) + ' ' + @current_story.name, edit_story_url( @current_story.id ) )
+              %li
+                = nav_link( t( 'groups.menu_title' ), story_groups_path( @current_story ) )
           #flags-area
             -#= link_to '/set_locale/en', method: :put do
             -#  %span{ class: 'flag flag-gb' }

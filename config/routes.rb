@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :groups
   put 'set_locale/:locale', constraints: { locale: /fr/ }, to: 'locales#set'
 
   resources :stories do

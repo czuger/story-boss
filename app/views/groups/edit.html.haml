@@ -1,8 +1,8 @@
 .page-header
-  = link_to groups_path, class: 'btn btn-default' do
+  = link_to story_groups_path( @current_story ), class: 'btn btn-default' do
     %span.glyphicon.glyphicon-list-alt
     = t( '.back' )
-  = link_to @group, class: 'btn btn-primary' do
+  = link_to [ @current_story, @group ], class: 'btn btn-primary' do
     %span.glyphicon.glyphicon-info-sign
     = t( '.show' )
   %h1= t( '.title' )
