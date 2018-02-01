@@ -21,6 +21,7 @@ fr:
       back: Retour
     form:
       submit: Valider
+      linked_chars: "Membres du groupe"
     menu_title: Groupes
     types:
       crew: Bande
