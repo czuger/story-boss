@@ -16,10 +16,14 @@ class GroupsController < ApplicationController
   # GET /groups/new
   def new
     @group = Group.new
+    @characters = @current_story.characters
+    @selected_character_ids = []
   end
 
   # GET /groups/1/edit
   def edit
+    @characters = @current_story.characters
+    @selected_character_ids = @group.characters.pluck(:id)
   end
 
   # POST /groups
@@ -30,6 +34,8 @@ class GroupsController < ApplicationController
 
     respond_to do |format|
       if @group.save
+        set_linked_characters
+
         format.html { redirect_to [ @current_story, @group ], notice: 'Group was successfully created.' }
         format.json { render :show, status: :created, location: @group }
       else
@@ -44,6 +50,8 @@ class GroupsController < ApplicationController
   def update
     respond_to do |format|
       if @group.update(group_params)
+        set_linked_characters
+
         format.html { redirect_to [ @current_story, @group ], notice: 'Group was successfully updated.' }
         format.json { render :show, status: :ok, location: @group }
       else
@@ -73,4 +81,15 @@ class GroupsController < ApplicationController
     def group_params
       params.require(:group).permit(:name, :desc, :groupe_type)
     end
+
+  def set_linked_characters
+    character_ids = params[:character_id].to_unsafe_h
+    to_update_character_ids = character_ids.to_a.map{ |e| e[0].to_i if e[1] == 'true' }.compact
+
+    # We set only the intersection of the requested characters ids and the current story characters ids
+    # to avoid characters stealing.
+    available_character_ids = @current_story.characters.pluck(:id)
+    @group.character_ids = to_update_character_ids & available_character_ids
+    @group.save!
+  end
 end

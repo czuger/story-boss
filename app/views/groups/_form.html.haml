@@ -39,6 +39,18 @@
         %span{ class: 'input-group-addon' }
           = f.radio_button( :groupe_type, 3 )
           = t( 'groups.types.organisation' )
+
+  .button_row_frame
+    %h4= t( 'plots.form.linked_chars' )
+    - @characters.in_groups_of( 4 ) do |group|
+      .row
+        - group.each do |character|
+          - if character
+            .col-sm-3.button_frame
+              %button.characters_btn.btn.col-sm-11{ type: :button, c_id: character.id, class: character_button_class( character ) }
+                = character.name
+                = hidden_field_tag "character_id[#{character.id}]", @selected_character_ids.include?( character.id )
+
       
 
   .form-group
