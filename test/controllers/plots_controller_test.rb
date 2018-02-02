@@ -61,7 +61,7 @@ class PlotsControllerTest < ActionDispatch::IntegrationTest
     assert_raise do
       get story_plots_url(@bobstory, @bobplot)
       get story_plots_url(@story, @bobplot)
-      get story_plots_url(@bobstory, @place)
+      get story_plots_url(@bobstory, @plot)
     end
   end
 
@@ -72,13 +72,13 @@ class PlotsControllerTest < ActionDispatch::IntegrationTest
 
   test "should update plot" do
     assert_difference('@plot.characters.count') do
-      patch story_plot_url(@story, @plot), params: { character_id: @goodcharacters, plot: { desc: @plot.desc, name: @plot.name, story_id: @plot.story_id } }
+      patch story_plot_url(@story, @plot), params: { character_id: @goodcharacters, plot: { desc: @plot.desc, name: @plot.name } }
     end
     assert_redirected_to story_plot_url(@story, @plot)
 
     @goodcharacters[@c2.id]='false'
     assert_difference('@plot.characters.count', -1) do
-      patch story_plot_url(@story, @plot), params: { character_id: @goodcharacters, plot: { desc: @plot.desc, name: @plot.name, story_id: @plot.story_id } }
+      patch story_plot_url(@story, @plot), params: { character_id: @goodcharacters, plot: { desc: @plot.desc, name: @plot.name } }
     end
     assert_redirected_to story_plot_url(@story, @plot)
   end
@@ -87,14 +87,14 @@ class PlotsControllerTest < ActionDispatch::IntegrationTest
     bad_characters = @goodcharacters
     bad_characters[@c3.id] = 'true'
     assert_difference('@plot.characters.count') do
-      patch story_plot_url(@story, @plot), params: { character_id: @goodcharacters, plot: { desc: @plot.desc, name: @plot.name, story_id: @plot.story_id } }
+      patch story_plot_url(@story, @plot), params: { character_id: @goodcharacters, plot: { desc: @plot.desc, name: @plot.name } }
     end
     assert_redirected_to story_plot_url(@story, @plot)
   end
 
   test "should not update bob plot" do
     assert_raise do
-      patch story_plots_url(@bobstory), params: { plot: { desc: @plot.desc, name: @plot.name, story_id: @plot.story_id } }
+      patch story_plots_url(@bobstory), params: { plot: { desc: @plot.desc, name: @plot.name } }
     end
   end
 
@@ -110,7 +110,7 @@ class PlotsControllerTest < ActionDispatch::IntegrationTest
     assert_raise do
       delete story_plots_url(@bobstory, @bobplot)
       delete story_plots_url(@story, @bobplot)
-      delete story_plots_url(@bobstory, @place)
+      delete story_plots_url(@bobstory, @plot)
     end
   end
 end
