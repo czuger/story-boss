@@ -10,7 +10,7 @@ $(document).on( "turbolinks:load", function() {
 
         var simulation = d3.forceSimulation()
             .force("link", d3.forceLink().id(function(d) { return d.id; }).distance(100))
-            .force("charge", d3.forceManyBody())
+            .force("charge", d3.forceManyBody().strength(-200))
             .force("center", d3.forceCenter(width / 2, height / 2));
 
         function draw_graph(error, graph) {
