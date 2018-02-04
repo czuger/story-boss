@@ -77,10 +77,9 @@ class GroupsControllerTest < ActionDispatch::IntegrationTest
   test "should not allow to steal bob characters" do
     bad_characters = @goodcharacters
     bad_characters[@c3.id] = 'true'
-    assert_difference('@group.characters.count') do
+    assert_raise do
       patch story_group_url(@story, @group), params: { character_id: @goodcharacters, group: { desc: @group.desc, name: @group.name } }
     end
-    assert_redirected_to story_group_url(@story, @group)
   end
 
   test "should destroy group" do

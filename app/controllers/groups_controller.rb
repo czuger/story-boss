@@ -84,12 +84,12 @@ class GroupsController < ApplicationController
 
   def set_linked_characters
     character_ids = params[:character_id]&.to_unsafe_h || []
-    to_update_character_ids = character_ids.to_a.map{ |e| e[0].to_i if e[1] == 'true' }.compact
 
-    # We set only the intersection of the requested characters ids and the current story characters ids
-    # to avoid characters stealing.
+    to_update_character_ids = character_ids.to_a.map{ |e| e[0].to_i if e[1] == 'true' }.compact
     available_character_ids = @current_story.characters.pluck(:id)
-    @group.character_ids = to_update_character_ids & available_character_ids
-    @group.save!
+
+    raise "Trying to link unpermitted characters to_update_character_ids = #{to_update_character_ids}, available_characters_ids = #{available_character_ids}" unless ( to_update_character_ids - available_character_ids ).empty?
+    @group.character_ids = to_update_character_ids
+    @group.save
   end
 end

@@ -86,10 +86,9 @@ class PlotsControllerTest < ActionDispatch::IntegrationTest
   test "should not allow to steal bob characters" do
     bad_characters = @goodcharacters
     bad_characters[@c3.id] = 'true'
-    assert_difference('@plot.characters.count') do
+    assert_raise do
       patch story_plot_url(@story, @plot), params: { character_id: @goodcharacters, plot: { desc: @plot.desc, name: @plot.name } }
     end
-    assert_redirected_to story_plot_url(@story, @plot)
   end
 
   test "should not update bob plot" do

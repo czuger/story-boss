@@ -103,11 +103,10 @@ class PlotsController < ApplicationController
     def set_linked_characters
       character_ids = params[:character_id]&.to_unsafe_h || []
       to_update_character_ids = character_ids.to_a.map{ |e| e[0].to_i if e[1] == 'true' }.compact
-
-      # We set only the intersection of the requested characters ids and the current story characters ids
-      # to avoid characters stealing.
       available_character_ids = @current_story.characters.pluck(:id)
-      @plot.character_ids = to_update_character_ids & available_character_ids
+
+      raise "Trying to link unpermitted characters to_update_character_ids = #{to_update_character_ids}, available_characters_ids = #{available_character_ids}" unless ( to_update_character_ids - available_character_ids ).empty?
+      @plot.character_ids = to_update_character_ids
       @plot.save!
     end
 
