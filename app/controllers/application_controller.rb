@@ -17,4 +17,17 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  private
+
+  def set_linked_characters( model )
+    character_ids = params[:character_id]&.to_unsafe_h || []
+
+    to_update_character_ids = character_ids.to_a.map{ |e| e[0].to_i if e[1] == 'true' }.compact
+    available_character_ids = @current_story.characters.pluck(:id)
+
+    raise "Trying to link unpermitted characters to_update_character_ids = #{to_update_character_ids}, available_characters_ids = #{available_character_ids}" unless ( to_update_character_ids - available_character_ids ).empty?
+    model.character_ids = to_update_character_ids
+    model.save
+  end
+
 end

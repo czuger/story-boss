@@ -34,7 +34,7 @@ class GroupsController < ApplicationController
 
     respond_to do |format|
       if @group.save
-        set_linked_characters
+        set_linked_characters( @group )
 
         format.html { redirect_to [ @current_story, @group ], notice: 'Group was successfully created.' }
         format.json { render :show, status: :created, location: @group }
@@ -50,7 +50,7 @@ class GroupsController < ApplicationController
   def update
     respond_to do |format|
       if @group.update(group_params)
-        set_linked_characters
+        set_linked_characters( @group )
 
         format.html { redirect_to [ @current_story, @group ], notice: 'Group was successfully updated.' }
         format.json { render :show, status: :ok, location: @group }
@@ -82,14 +82,4 @@ class GroupsController < ApplicationController
       params.require(:group).permit(:name, :desc, :groupe_type)
     end
 
-  def set_linked_characters
-    character_ids = params[:character_id]&.to_unsafe_h || []
-
-    to_update_character_ids = character_ids.to_a.map{ |e| e[0].to_i if e[1] == 'true' }.compact
-    available_character_ids = @current_story.characters.pluck(:id)
-
-    raise "Trying to link unpermitted characters to_update_character_ids = #{to_update_character_ids}, available_characters_ids = #{available_character_ids}" unless ( to_update_character_ids - available_character_ids ).empty?
-    @group.character_ids = to_update_character_ids
-    @group.save
-  end
 end
